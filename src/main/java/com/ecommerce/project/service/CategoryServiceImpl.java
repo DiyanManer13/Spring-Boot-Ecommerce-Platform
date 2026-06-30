@@ -23,4 +23,15 @@ public class CategoryServiceImpl implements com.ecommerce.project.service.Catego
 
     }
 
+    @Override
+    public String deleteCategory(Long categoryId){
+        Category category = categories.stream() //Functional programing
+                .filter(c -> c.getCategoryId().equals(categoryId))
+                .findFirst().orElse(null);
+        if(category==null){
+            return "Category not found";
+        }
+        categories.remove(category);
+        return "Category with CategoryId : "+categoryId+" deleted successfully";
+    }
 }
