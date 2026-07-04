@@ -13,27 +13,27 @@ import java.util.List;
 
 
 @RestController
-
+@RequestMapping("/api")
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
     //@GetMapping("/api/public/categories")
-    @RequestMapping(value="/api/public/categories",method = RequestMethod.GET) //so instead of @GEtmapping we can ues this directly. RequestMapping need two parameer
+    @RequestMapping(value="/public/categories",method = RequestMethod.GET) //so instead of @GEtmapping we can ues this directly. RequestMapping need two parameer
     public ResponseEntity<List<Category>> getAllCategories(){
         List<Category> categories = categoryService.getAllCategories();
         return new ResponseEntity<>(categories,HttpStatus.OK);
     }
 
     // @PostMapping("/api/public/categories")
-    @RequestMapping(value="/api/public/categories",method = RequestMethod.POST)
+    @RequestMapping(value="/public/categories",method = RequestMethod.POST)
     public ResponseEntity<String> createCategory(@RequestBody Category category){
 
             categoryService.createCategory(category);
             return new ResponseEntity<>("Category Added Successfully",HttpStatus.CREATED);
 
     }
-    @DeleteMapping("/api/admin/categories/{categoryId}")
+    @DeleteMapping("/admin/categories/{categoryId}")
     public ResponseEntity<String> deleteCategory(@PathVariable Long categoryId){
         try {
             String status = categoryService.deleteCategory(categoryId);
@@ -44,7 +44,7 @@ public class CategoryController {
         }
     }
 
-    @PutMapping("/api/pubic/categories/{categoryId}")
+    @PutMapping("/pubic/categories/{categoryId}")
     public ResponseEntity<String> updateCategory(@RequestBody Category category,@PathVariable Long categoryId){
         try{
             Category savedCategory = categoryService.updateCategory(category,categoryId);
