@@ -3,6 +3,7 @@ package com.ecommerce.project.controller;
 import com.ecommerce.project.model.Category;
 import com.ecommerce.project.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,8 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    @GetMapping("/api/public/categories")
+    //@GetMapping("/api/public/categories")
+    @RequestMapping(value="/api/public/categories",method = RequestMethod.GET) //so instead of @GEtmapping we can ues this directly. RequestMapping need two parameer
     public ResponseEntity<List<Category>> getAllCategories(){
         List<Category> categories = categoryService.getAllCategories();
         return new ResponseEntity<>(categories,HttpStatus.OK);
@@ -37,6 +39,16 @@ public class CategoryController {
 
             return new ResponseEntity<>(status, HttpStatus.OK);
         }catch(ResponseStatusException e){
+            return new ResponseEntity<>(e.getReason(),e.getStatusCode());
+        }
+    }
+
+    @PutMapping("/api/pubic/categories/{categoryId}")
+    public ResponseEntity<String> updateCategory(@RequestBody Category category,@PathVariable Long categoryId){
+        try{
+            Category savedCategory = categoryService.updateCategory(category,categoryId);
+            return new ResponseEntity<>("Category with Category Id : "+ categoryId+" is Updated",HttpStatus.OK);
+        }catch (ResponseStatusException e){
             return new ResponseEntity<>(e.getReason(),e.getStatusCode());
         }
     }
