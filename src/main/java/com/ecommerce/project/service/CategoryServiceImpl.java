@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CategoryServiceImpl implements com.ecommerce.project.service.CategoryService {
+public class CategoryServiceImpl implements com.ecommerce.project.service.CategoryService{
     private long nextId=1L;
     private List<Category> categories =new ArrayList<>();
 
@@ -23,7 +23,6 @@ public class CategoryServiceImpl implements com.ecommerce.project.service.Catego
     public void createCategory(Category category){
         category.setCategoryId(nextId++);
         categories.add(category);
-
     }
 
     @Override
