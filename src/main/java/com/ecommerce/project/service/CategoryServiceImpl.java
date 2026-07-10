@@ -42,9 +42,9 @@ public class CategoryServiceImpl implements com.ecommerce.project.service.Catego
 
     @Override
     public Category updateCategory(Category category,long categoryId){
-        Optional<Category> saveCategoryOptional = categoryRepository.findById(categoryId);
 
-        Category savedCategory = saveCategoryOptional.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        Category savedCategory = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         category.setCategoryId(categoryId);
 
