@@ -42,17 +42,13 @@ public class CategoryServiceImpl implements com.ecommerce.project.service.Catego
 
     @Override
     public Category updateCategory(Category category,long categoryId){
-        List<Category> categories = categoryRepository.findAll();
-        Optional<Category> optionalCategory = categories.stream()
-                .filter(c -> c.getCategoryId().equals(categoryId))
-                .findFirst();
-        if(optionalCategory.isPresent()){
-            Category existingCategory = optionalCategory.get();
-            existingCategory.setCategoryName(category.getCategoryName());
-            Category savedCategory = categoryRepository.save(existingCategory);
-            return savedCategory;
-        }else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Category Not Found");
-        }
+        Optional<Category> saveCategoryOptional = categoryRepository.findById(categoryId);
+
+        Category savedCategory = saveCategoryOptional.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        category.setCategoryId(categoryId);
+
+        savedCategory = categoryRepository.save(category);
+        return savedCategory;
     }
 }
