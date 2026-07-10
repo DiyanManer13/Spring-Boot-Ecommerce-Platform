@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @Service
 public class CategoryServiceImpl implements com.ecommerce.project.service.CategoryService{
-    private long nextId=1L;
+
     private List<Category> categories =new ArrayList<>();
 
     @Autowired
@@ -26,7 +26,6 @@ public class CategoryServiceImpl implements com.ecommerce.project.service.Catego
 
     @Override
     public void createCategory(Category category){
-        category.setCategoryId(nextId++);
         categoryRepository.save(category);
     }
 
