@@ -18,6 +18,7 @@ public class Category{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // there are different generation types like auto,identity,sequence,table
     private Long categoryId;
+
     private String categoryName;
 
 
