@@ -31,10 +31,9 @@ public class CategoryServiceImpl implements com.ecommerce.project.service.Catego
 
     @Override
     public String deleteCategory(Long categoryId){
-        List<Category> categories = categoryRepository.findAll();
-        Category category = categories.stream() //Functional programing
-                .filter(c -> c.getCategoryId().equals(categoryId))
-                .findFirst().orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Resource not found"));
+
+        Category category = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new  (HttpStatus.NOT_FOUND,"Resource not found"));
 
         categoryRepository.delete(category);
         return "Category with CategoryId : "+categoryId+" deleted successfully";
