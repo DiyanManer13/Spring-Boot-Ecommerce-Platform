@@ -33,7 +33,7 @@ public class CategoryServiceImpl implements com.ecommerce.project.service.Catego
     public String deleteCategory(Long categoryId){
 
         Category category = categoryRepository.findById(categoryId)
-                .orElseThrow(() -> new  (HttpStatus.NOT_FOUND,"Resource not found"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Resource not found"));
 
         categoryRepository.delete(category);
         return "Category with CategoryId : "+categoryId+" deleted successfully";
