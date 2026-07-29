@@ -1,5 +1,6 @@
 package com.ecommerce.project.service;
 
+import com.ecommerce.project.exceptions.ResourceNotFoundException;
 import com.ecommerce.project.model.Category;
 import com.ecommerce.project.repositories.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class CategoryServiceImpl implements com.ecommerce.project.service.Catego
     public String deleteCategory(Long categoryId){
 
         Category category = categoryRepository.findById(categoryId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Resource not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Category","category_id",categoryId));
 
         categoryRepository.delete(category);
         return "Category with CategoryId : "+categoryId+" deleted successfully";

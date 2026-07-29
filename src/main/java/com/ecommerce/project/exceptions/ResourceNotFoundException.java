@@ -1,5 +1,7 @@
 package com.ecommerce.project.exceptions;
 
+import org.springframework.http.HttpStatus;
+
 public class ResourceNotFoundException extends RuntimeException{
     String resourceName;
     String field;
@@ -19,4 +21,6 @@ public class ResourceNotFoundException extends RuntimeException{
         this.field = field;
         this.fieldId = fieldId;
     }
+
+
 }
