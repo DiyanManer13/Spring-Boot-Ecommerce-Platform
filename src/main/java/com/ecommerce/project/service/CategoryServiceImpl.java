@@ -34,7 +34,7 @@ public class CategoryServiceImpl implements com.ecommerce.project.service.Catego
     public String deleteCategory(Long categoryId){
 
         Category category = categoryRepository.findById(categoryId)
-                .orElseThrow(() -> new ResourceNotFoundException("Category","category_id",categoryId));
+                .orElseThrow(() -> new ResourceNotFoundException("Category","categoryId",categoryId));
 
         categoryRepository.delete(category);
         return "Category with CategoryId : "+categoryId+" deleted successfully";
@@ -44,7 +44,7 @@ public class CategoryServiceImpl implements com.ecommerce.project.service.Catego
     public Category updateCategory(Category category,long categoryId){
 
         Category savedCategory = categoryRepository.findById(categoryId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new ResourceNotFoundException("Category","categoryId",categoryId));
 
         category.setCategoryId(categoryId);
 
