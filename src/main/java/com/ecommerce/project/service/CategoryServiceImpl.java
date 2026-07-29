@@ -23,6 +23,10 @@ public class CategoryServiceImpl implements com.ecommerce.project.service.Catego
 
     @Override
     public List<Category> getAllCategories(){
+        List<Category> categories =categoryRepository.findAll();
+        if(categories.size()==0){
+            throw new APIException("No Category exist so far");
+        }
         return categoryRepository.findAll();
     }
 
