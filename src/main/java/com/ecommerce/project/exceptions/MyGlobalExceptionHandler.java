@@ -13,8 +13,7 @@ import java.util.Map;
 @RestControllerAdvice
 
 public class MyGlobalExceptionHandler {
-    @ExceptionHandler(Exception.class)
-    //@ExceptionHandler(MethodArgumentNotValidException.class)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String,String>> myMethodArgumentNotValidException(MethodArgumentNotValidException e){
         Map<String,String> response = new HashMap<>();
         // this method will retrieve a list of all the errors caught during the validation
