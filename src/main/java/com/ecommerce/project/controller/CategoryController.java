@@ -16,14 +16,17 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    @GetMapping("/echo")
-    public ResponseEntity<String> echoMessage(@RequestParam String messsage){
+    @GetMapping("/echo")   // learning purpose
+    public ResponseEntity<String> echoMessage(@RequestParam(name="message") String messsage){   // http://localhost:8080/api/echo?message="Hi"
         return new ResponseEntity<>("Echoed message: "+messsage,HttpStatus.OK);
     }
     @GetMapping("/public/categories")
-    public ResponseEntity<CategoryResponse> getAllCategories(){
+    public ResponseEntity<CategoryResponse> getAllCategories(
+        @RequestParam(name = "pageNumber") Integer pageNumber,   // for pagination we need to display pageNumber , pageSize in url
+        @RequestParam(name = "pageSize") Integer pageSize){
+
         CategoryResponse categoryResponse = categoryService.getAllCategories();
-        return new ResponseEntity<>(categoryResponse, HttpStatus.OK);
+        return new ResponseEntity<>(categoryResponse,HttpStatus.OK);
     }
 
     @PostMapping("/public/categories")
